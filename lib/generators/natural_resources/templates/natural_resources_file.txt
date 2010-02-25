@@ -1,0 +1,3 @@
+NaturalResources.new do
+  
+end

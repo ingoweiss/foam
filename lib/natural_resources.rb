@@ -1,41 +1,56 @@
-# config/natural_resources.rb
-# NaturalResources.generate do
-#   
-#   plural :posts => {:title => :string, :body => :text} do
-#     plural :comments => {:body => :text}
-#     singular :approval => {}
-#   end
-#   
-# end
-
-
-
 class NaturalResources
    
-  def initialize(adapter=NaturalResources::Adapters::NaturalResourcesAdapter, &block)
-    @scope = []                          
-    @adapter = adapter
+  def initialize(&block)
+    @scope = []
     self.instance_exec(&block)
   end
   
   class << self
-    alias_method :generate, :new
+    alias_method :define, :new
+    
+    def resources
+      @@resources ||= []
+    end
+    
+    def routes_definition
+      @@route_definition ||= "\n"
+    end
+    
+    def add_to_routes_definition(line, scope)
+      routes_definition << ' '*(scope.length+2) + line + "\n"
+    end
+    
+    def load(root)
+      require root + '/config/natural_resources'
+    end                                        
   end
   
-  def plural(resources)
-    raise ArgumentError if block_given? and not resources.keys.one?
-    resources.each do |resource, attributes|
-      @adapter.generate(resource, :plural, @scope, attributes)
+  def many(resource, attributes={})
+    current_scope = @scope.dup
+    self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => false}]
+    if block_given?
+      @scope << resource
+      self.class.add_to_routes_definition "resources :#{resource} do", current_scope
+      yield
+      self.class.add_to_routes_definition "end", current_scope
+      @scope = current_scope
+    else
+      self.class.add_to_routes_definition "resources :#{resource}", current_scope
     end
-    @scope << resources.keys.first and yield if block_given? 
   end
   
-  def singular(resources)
-    raise ArgumentError if block_given? and not resources.keys.one?
-    resources.each do |resource, attributes|
-      @adapter.generate(resource, :singular, @scope, attributes)
+  def one(resource, attributes={})
+    current_scope = @scope.dup
+    self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => true}]
+    if block_given?
+      @scope << resource
+      self.class.add_to_routes_definition "resource :#{resource} do", current_scope
+      yield
+      self.class.add_to_routes_definition "end", current_scope
+      @scope = current_scope
+    else
+      self.class.add_to_routes_definition "resource :#{resource}", current_scope
     end
-    @scope << resources.keys.first and yield if block_given? 
   end
   
 end
