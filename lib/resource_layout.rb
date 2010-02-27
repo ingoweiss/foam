@@ -1,4 +1,4 @@
-class NaturalResources
+class ResourceLayout
    
   def initialize(&block)
     @scope = []
@@ -21,7 +21,7 @@ class NaturalResources
     end
     
     def load(root)
-      require root + '/config/natural_resources'
+      require root + '/config/resource_layout'
     end                                        
   end
   

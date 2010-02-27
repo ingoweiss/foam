@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    ./script/generate natural_resources Thing
+    rails generate resource_layout --generator ingoweiss:scaffold
 
     This will create:
         what/will/it/create

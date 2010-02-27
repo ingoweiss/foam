@@ -1,31 +1,31 @@
-class NaturalResourcesGenerator < Rails::Generators::Base
+class ResourceLayoutGenerator < Rails::Generators::Base
   
-  class_option :generator, :type => :string, :default => 'ingoweiss:scaffold'
+  class_option :generator, :type => :string
   
   def self.source_root
     @source_root ||= File.join(File.dirname(__FILE__), 'templates')
   end
   
-  def run_generators_or_create_natural_resources_file
-    natural_resources_file_exists? ? run_generators : create_natural_resources_file
+  def run_generators_or_create_resource_layout_file
+    resource_layout_file_exists? ? run_generators : create_resource_layout_file
   end
   
   protected
   
-  def create_natural_resources_file
-    if yes? 'Create natural resources file?'
-      copy_file 'natural_resources_file.txt', 'config/natural_resources.rb'
+  def create_resource_layout_file
+    if yes? 'Create resource layout file?'
+      copy_file 'resource_layout_file.txt', 'config/resource_layout.rb'
     end
   end
   
   def run_generators
-    NaturalResources.load(destination_root)
-    NaturalResources.resources.each do |resource|
+    ResourceLayout.load(destination_root)
+    ResourceLayout.resources.each do |resource|
       invoke options[:generator], arguments_for_generator_invocation(resource)
-      # NaturalResourcesGenerator.remove_invocation options[:generator]
+      # ResourceLayoutGenerator.remove_invocation options[:generator]
       puts "rails generate ingoweiss:scaffold #{arguments_for_generator_invocation(resource).join(' ')}"
     end
-    route NaturalResources.routes_definition
+    route ResourceLayout.routes_definition
   end
   
   # TODO: Need to figure out how to invoke generators with parsed ruby arguments:
@@ -53,8 +53,8 @@ class NaturalResourcesGenerator < Rails::Generators::Base
     end
   end
   
-  def natural_resources_file_exists?
-    File.exists?(File.join(destination_root, 'config/natural_resources.rb'))
+  def resource_layout_file_exists?
+    File.exists?(File.join(destination_root, 'config/resource_layout.rb'))
   end
   
 end

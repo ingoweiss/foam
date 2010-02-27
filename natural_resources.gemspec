@@ -1,5 +1,5 @@
 Gem::Specification.new do |gem|
-  gem.name    = 'natural_resources'
+  gem.name    = 'resource_layout'
   gem.version = '0.0.0'
   gem.summary = ''
 
