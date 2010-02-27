@@ -30,12 +30,12 @@ class NaturalResources
     self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => false}]
     if block_given?
       @scope << resource
-      self.class.add_to_routes_definition "resources :#{resource} do", current_scope
+      self.class.add_to_routes_definition "resources :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.pluralize}' do", current_scope
       yield
       self.class.add_to_routes_definition "end", current_scope
       @scope = current_scope
     else
-      self.class.add_to_routes_definition "resources :#{resource}", current_scope
+      self.class.add_to_routes_definition "resources :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.pluralize}'", current_scope
     end
   end
   
@@ -44,12 +44,12 @@ class NaturalResources
     self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => true}]
     if block_given?
       @scope << resource
-      self.class.add_to_routes_definition "resource :#{resource} do", current_scope
+      self.class.add_to_routes_definition "resource :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.pluralize}' do", current_scope
       yield
       self.class.add_to_routes_definition "end", current_scope
       @scope = current_scope
     else
-      self.class.add_to_routes_definition "resource :#{resource}", current_scope
+      self.class.add_to_routes_definition "resource :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.pluralize}'", current_scope
     end
   end
   

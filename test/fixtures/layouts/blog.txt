@@ -1,0 +1,3 @@
+NaturalResources.define do
+ many :posts
+end
