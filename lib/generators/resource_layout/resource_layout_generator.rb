@@ -1,3 +1,5 @@
+require 'resource_layout'
+
 class ResourceLayoutGenerator < Rails::Generators::Base
   
   class_option :generator, :type => :string
@@ -21,9 +23,12 @@ class ResourceLayoutGenerator < Rails::Generators::Base
   def run_generators
     ResourceLayout.load(destination_root)
     ResourceLayout.resources.each do |resource|
-      invoke options[:generator], arguments_for_generator_invocation(resource)
+      # invoke options[:generator], arguments_for_generator_invocation(resource)
       # ResourceLayoutGenerator.remove_invocation options[:generator]
-      puts "rails generate ingoweiss:scaffold #{arguments_for_generator_invocation(resource).join(' ')}"
+      # TODO: Invocation does not work yet (only the first is actually carried out). Until this is fixed:
+      Dir.chdir(destination_root) do
+        %x[rails generate ingoweiss:scaffold #{arguments_for_generator_invocation(resource).join(' ')}]
+      end
     end
     route ResourceLayout.routes_definition
   end

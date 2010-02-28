@@ -1,3 +1,6 @@
 ResourceLayout.define do
- many :posts
+ many :posts, :title => :string, :body => :text do
+  many :comments, :body => :text
+  one :approval
+ end
 end
