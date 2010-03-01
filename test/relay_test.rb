@@ -30,6 +30,11 @@ class RelayTest < ActionController::IntegrationTest
     assert_response :success
     @comment = @post.comments.find_by_body('Great post!')
     assert_not_nil @comment
+    get "/posts/#{@post.to_param}/approval/new"
+    assert_response :success
+    post "/posts/#{@post.to_param}/approval"
+    # responder redirect does not work here: https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/4077
+    assert_not_nil @post.approval
   end
   
 end
