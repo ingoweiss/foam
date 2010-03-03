@@ -22,11 +22,10 @@ class ResourceLayoutGenerator < Rails::Generators::Base
   
   def run_generators
     ResourceLayout.load(destination_root)
+    generator_class = Rails::Generators.find_by_namespace(options[:generator].to_s)
     ResourceLayout.resources.each do |resource|
-      # TODO: Invocation does not work yet (only the first is actually carried out). Until this is fixed:
-      Dir.chdir(destination_root) do
-        %x[rails generate ingoweiss:scaffold #{arguments_for_generator_invocation(resource).join(' ')}]
-      end
+      generator_class.start(arguments_for_generator_invocation(resource))
+      sleep 1.1 # Hack to prevent 'Multiple migrations have the version number' errors
     end
     route ResourceLayout.routes_definition
   end
