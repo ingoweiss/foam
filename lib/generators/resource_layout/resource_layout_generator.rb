@@ -24,7 +24,15 @@ class ResourceLayoutGenerator < Rails::Generators::Base
     ResourceLayout.load(destination_root)
     generator_class = Rails::Generators.find_by_namespace(options[:generator].to_s)
     ResourceLayout.resources.each do |resource|
-      generator_class.start(arguments_for_generator_invocation(resource))
+      # (1) generator_class.start(arguments_for_generator_invocation(resource))
+      # does not parse --scope option array properly
+      # (2) resource_name, resource_attributes, resource_options = resource
+      # generator_class.new([resource_name, resource_attributes], resource_options).invoke
+      # does not handle ruby hash as attributes properly ('named_base.rb' messes this up)
+      # (3) so...
+      Dir.chdir(destination_root) do
+        %x[rails generate ingoweiss:scaffold #{arguments_for_generator_invocation(resource).join(' ')}]
+      end
       sleep 1.1 # Hack to prevent 'Multiple migrations have the version number' errors
     end
     route ResourceLayout.routes_definition
@@ -36,7 +44,6 @@ class ResourceLayoutGenerator < Rails::Generators::Base
   # invoke 'ingoweiss:scaffold', ['post', 'title:string', '--singleton', '--skip-routes']
   def arguments_for_generator_invocation(resource)
     resource_name, resource_attributes, resource_options = resource
-    # puts [resource_name, resource_attributes.inspect, resource_options.inspect].join(' ')
     arguments = [resource_name.to_s]
     resource_attributes.each{|name, type| arguments << "#{name}:#{type}"}
     resource_options.merge(:skip_route => true).each{|name, value| arguments << option_for_generator_invocation(name, value)}
