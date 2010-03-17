@@ -27,9 +27,9 @@ class ResourceLayout
   
   def many(resource, attributes={})
     current_scope = @scope.dup
-    self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => false}]
+    self.class.resources << [resource.to_s, attributes, {:scope => current_scope, :singleton => false}]
     if block_given?
-      @scope << resource
+      @scope << resource.to_s
       self.class.add_to_routes_definition "resources :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.pluralize}' do", current_scope
       yield
       self.class.add_to_routes_definition "end", current_scope
@@ -41,9 +41,9 @@ class ResourceLayout
   
   def one(resource, attributes={})
     current_scope = @scope.dup
-    self.class.resources << [resource, attributes, {:scope => current_scope, :singleton => true}]
+    self.class.resources << [resource.to_s, attributes, {:scope => current_scope, :singleton => true}]
     if block_given?
-      @scope << resource
+      @scope << resource.to_s
       self.class.add_to_routes_definition "resource :#{resource}, :controller => '#{current_scope.collect{|s| s.to_s.singularize + '_'}.join}#{resource.to_s.singularize}' do", current_scope
       yield
       self.class.add_to_routes_definition "end", current_scope
