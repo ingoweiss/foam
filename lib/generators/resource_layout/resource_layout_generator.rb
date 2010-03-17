@@ -25,7 +25,7 @@ class ResourceLayoutGenerator < Rails::Generators::Base
     generator_class = Rails::Generators.find_by_namespace(options[:generator].to_s)
     ResourceLayout.resources.each do |resource|
       resource_name, resource_attributes, resource_options = resource
-      generator_class.new([resource_name, *resource_attributes_array(resource_attributes)], resource_options).invoke
+      generator_class.new([resource_name, resource_attributes_array(resource_attributes)], resource_options).invoke
       sleep 1.1 # Hack to prevent 'Multiple migrations have the version number' errors
     end
     route ResourceLayout.routes_definition
