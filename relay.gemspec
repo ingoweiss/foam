@@ -9,5 +9,5 @@ Gem::Specification.new do |gem|
   gem.homepage = 'http://www.github.com/ingoweiss'
   
   gem.files = Dir['lib/**/*']
-  gem.add_dependency 'rails', '3.0.0.beta'
+  gem.add_dependency 'rails', '3.0.0.beta2'
 end

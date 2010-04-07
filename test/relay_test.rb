@@ -1,16 +1,8 @@
 require File.join(File.dirname(__FILE__), 'helpers/test_helper')
 
-include HostAppHelper
-
 class RelayTest < ActionController::IntegrationTest
   
   def setup
-    recreate_host_app
-    install_relay_into_host_app
-    install_resource_layout_file('blog')
-    execute_in_host_app_root('rails generate resource_layout --generator=ingoweiss:scaffold')
-    migrate_host_app_db
-    load_host_app
   end
 
   def test_blog
@@ -33,6 +25,8 @@ class RelayTest < ActionController::IntegrationTest
     get "/posts/#{@post.to_param}/approval/new"
     assert_response :success
     post "/posts/#{@post.to_param}/approval"
+    follow_redirect!
+    # assert_response :success
     # responder redirect does not work here: https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/4077
     assert_not_nil @post.approval
   end
