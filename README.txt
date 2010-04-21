@@ -14,7 +14,9 @@ domsc (domain scaffold generator)
 dosca
 domain_scaffold_generator
 dome
+doom
 domato
+tomato
 ddgen (domain-driven generator)
 domo
 crick (after Watson/Crick, the discoverers of DNS)      
