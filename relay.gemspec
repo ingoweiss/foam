@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'relay'
-  gem.version = '0.0.2'
+  gem.version = '0.0.3'
   gem.summary = ''
   gem.authors = ['Ingo Weiss']
   gem.summary = 'Generate scaffold for entire applications with arbitrarily nested resources'
@@ -9,5 +9,5 @@ Gem::Specification.new do |gem|
   gem.homepage = 'http://www.github.com/ingoweiss'
   
   gem.files = Dir['lib/**/*']
-  gem.add_dependency 'rails', '3.0.0.beta2'
+  gem.add_dependency 'rails', '>~ 3.0'
 end
