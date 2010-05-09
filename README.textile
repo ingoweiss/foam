@@ -21,7 +21,7 @@ rails generate resource_layout
 
 p. Next, edit 'config/resource_layout.rb' to match the resource layout you want to generate. Presently, there is really not much to the syntax: 'many' is for plural and 'one' for singular resources, resource attribute name/type pairs are passed in as an options hash:
 
-bc(ruby) # config/resource_layout.rb
+bc(ruby).. # config/resource_layout.rb
 ResourceLayout.define do
   many :posts, :title => :string, :body => :text do
     many :comments, :body => :text
@@ -33,12 +33,12 @@ p. Lastly, run relay using the scaffold generator of your choice. Relay expects 
 
 bc.. rails generate resource_layout --generator=ingoweiss:scaffold
 
-This will generate scaffold for the followign resources:
+p. This will generate scaffold for the following resources:
 
 * /posts
 * /posts/123/comments
 * /posts/123/approval
 
-Relay is experimental and expected to change
+Please note that relay is experimental, so expect it to change
 
 Copyright (c) 2010 Ingo Weiss, released under the MIT license
