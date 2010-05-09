@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), 'helpers/test_helper')
 
-class RelayTest < ActionController::IntegrationTest
+class FoamTest < ActionController::IntegrationTest
   
   def setup
   end

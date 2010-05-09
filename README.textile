@@ -1,20 +1,20 @@
-h2. Relay
+h2. Foam
 
-p. Relay is a meta generator for generating scaffold for a Rails application from a description of the application's resource layout
+p. Foamfoam is a meta generator for generating scaffold for a Rails application from a description of the application's resource layout
 
 h3. Installation
 
-bc.. gem install relay
+bc.. gem install foam
 
 h3. Usage
 
-p. First we need to install relay
+p. First we need to install foam
 
 bc(ruby).. # Gemfile
-gem 'relay'
-gem 'ingoweiss_generators' # or any other generator that can be driven by relay (see below)
+gem 'foam'
+gem 'ingoweiss_generators' # or any other generator that can be driven by foam (see below)
 
-p. Then, we run relay once to create the 'config/resource_layout.rb' file
+p. Then, we run foam once to create the 'config/resource_layout.rb' file
 
 bc.. # reply with 'yes' when prompted 'Create resource layout file?'
 rails generate resource_layout
@@ -29,7 +29,7 @@ ResourceLayout.define do
   end
 end
 
-p. Lastly, run relay using the scaffold generator of your choice. Relay expects a scaffold generator which, in addition to the usual 'name' and 'attributes' arguments supports a 'scope' option of type array for specifying parent resources and a 'skip-routes' option for skipping route definition injection (so that relay can inject the nested route definition at the end instead). The "ingoweiss_generators":http://github.com/ingoweiss/ingoweiss_generators gem contains the 'ingoweiss:scaffold' generator that meets those requirements
+p. Lastly, run foam using the scaffold generator of your choice. Foam expects a scaffold generator which, in addition to the usual 'name' and 'attributes' arguments supports a 'scope' option of type array for specifying parent resources and a 'skip-routes' option for skipping route definition injection (so that foam can inject the nested route definition at the end instead). The "ingoweiss_generators":http://github.com/ingoweiss/ingoweiss_generators gem contains the 'ingoweiss:scaffold' generator that meets those requirements
 
 bc.. rails generate resource_layout --generator=ingoweiss:scaffold
 
@@ -39,6 +39,6 @@ p. This will generate scaffold for the following resources:
 * /posts/123/comments
 * /posts/123/approval
 
-Please note that relay is experimental, so expect it to change
+Please note that foam is experimental, so expect it to change
 
 Copyright (c) 2010 Ingo Weiss, released under the MIT license

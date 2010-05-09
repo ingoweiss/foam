@@ -6,7 +6,7 @@ include HostAppHelper
 
 
 recreate_host_app
-install_relay_into_host_app
+install_foam_into_host_app
 install_resource_layout_file('blog')
 execute_in_host_app_root('rails generate resource_layout --generator=ingoweiss:scaffold')
 migrate_host_app_db

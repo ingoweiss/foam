@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    rails generate resource_layout --generator ingoweiss:scaffold
+    rails generate resource_layout --generator=ingoweiss:scaffold
 
     This will create:
-        what/will/it/create
+        scaffold for application with resource layout as described in config/resource_layout.rb
