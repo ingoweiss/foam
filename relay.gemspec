@@ -3,8 +3,8 @@ Gem::Specification.new do |gem|
   gem.version = '0.0.3'
   gem.summary = ''
   gem.authors = ['Ingo Weiss']
-  gem.summary = 'Generate scaffold for entire applications with arbitrarily nested resources'
-  gem.description = 'Relay allows for generation of entire Rails apps from a single domain model'
+  gem.summary = 'A scaffold meta-generator'
+  gem.description = 'Relay is a meta generator for generating scaffold for a Rails application from a description of the application\'s resource layout'
   gem.email = 'ingo@ingoweiss.com'
   gem.homepage = 'http://www.github.com/ingoweiss'
   
