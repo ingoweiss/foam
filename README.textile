@@ -1,6 +1,6 @@
 h2. Foam
 
-p. Foamfoam is a meta generator for generating scaffold for a Rails application from a description of the application's resource layout
+p. Foam installs an experimental meta generator for generating scaffold for a Rails application from a description of the application's resource layout
 
 h3. Installation
 
@@ -39,6 +39,6 @@ p. This will generate scaffold for the following resources:
 * /posts/123/comments
 * /posts/123/approval
 
-Please note that foam is experimental, so expect it to change
+Please note that due to the experimental nature of foam it is subject to change
 
 Copyright (c) 2010 Ingo Weiss, released under the MIT license
