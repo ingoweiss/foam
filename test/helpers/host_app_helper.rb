@@ -7,7 +7,7 @@ module HostAppHelper
   
   def recreate_host_app
     FileUtils.rm_rf(HOST_APP_ROOT) if File.exist?(HOST_APP_ROOT)
-    %x[rails #{HOST_APP_ROOT} -m #{FOAM_ROOT}/test/fixtures/host_app_template.rb --quiet]
+    %x[rails new #{HOST_APP_ROOT} --template=#{FOAM_ROOT}/test/fixtures/host_app_template.rb --quiet]
   end
   
   def install_foam_into_host_app

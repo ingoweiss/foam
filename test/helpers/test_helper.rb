@@ -4,7 +4,6 @@ require 'ruby-debug'
 require File.join(File.dirname(__FILE__), 'host_app_helper')
 include HostAppHelper
 
-
 recreate_host_app
 install_foam_into_host_app
 install_resource_layout_file('blog')
