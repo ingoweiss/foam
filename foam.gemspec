@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'foam'
-  gem.version = '0.0.3'
+  gem.version = '0.0.4'
   gem.summary = ''
   gem.authors = ['Ingo Weiss']
   gem.summary = 'A scaffold meta-generator'
@@ -9,5 +9,5 @@ Gem::Specification.new do |gem|
   gem.homepage = 'http://www.github.com/ingoweiss/foam'
   
   gem.files = Dir['lib/**/*']
-  gem.add_dependency 'rails', '~> 3.0.0.beta4'
+  gem.add_dependency 'rails', '>= 3.0.0.rc'
 end
